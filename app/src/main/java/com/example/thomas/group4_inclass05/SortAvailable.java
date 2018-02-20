@@ -5,4 +5,5 @@ package com.example.thomas.group4_inclass05;
  */
 
 class SortAvailable {
+    String top;
 }

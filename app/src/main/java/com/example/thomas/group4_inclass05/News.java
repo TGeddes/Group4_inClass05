@@ -5,4 +5,7 @@ package com.example.thomas.group4_inclass05;
  */
 
 class News {
+    String id, name, description, url, category, language, country;
+    UrlLogos logos;
+    SortAvailable available;
 }
