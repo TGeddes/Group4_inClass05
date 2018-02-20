@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class GetDataAsync extends AsyncTask<String, Void, ArrayList<News>> {
         @Override
-        protected ArrayList<News> doInBackground(String... strings) {
+        protected ArrayList<News> doInBackground(String... params) {
             HttpURLConnection connection = null;
             ArrayList<News> result = new ArrayList<>();
 
@@ -54,35 +54,43 @@ public class MainActivity extends AppCompatActivity {
                     JSONArray news = root.getJSONArray("source");
 
                     for(int i = 0; i < news.length(); i++){
-                        String newsJson = IOUtils.toString(connection.getInputStream(), "UTF8");
-                        News news = news.getJSONObject(i);
-                        news.id = newsJson.getString("id");
-                        news.name = newsJson.getString("name");
-                        news.description = newsJson.getString("description");
-                                /*"id": "abc-news-au",
-            "name": "ABC News (AU)",
-            "description": "Australia's most trusted source of local, national and world news. Comprehensive, independent, in-depth analysis, the latest business, sport, weather and more.",
-            "url": "http://www.abc.net.au/news",
-            "category": "general",
-            "language": "en",
-            "country": "au",
-            "urlsToLogos": {
-                "small": "",
-                "medium": "",
-                "large": ""
-            },
-            "sortBysAvailable": [
-                "top"
-            ]*/
+                        JSONObject newsJson = news.getJSONObject(i);
+                        News news1 = new News();
+                        news1.id = newsJson.getString("id");
+                        news1.name = newsJson.getString("name");
+                        news1.description = newsJson.getString("description");
+                        news1.url = newsJson.getString("url");
+                        news1.category = newsJson.getString("category");
+                        news1.language = newsJson.getString("language");
+                        news1.country = newsJson.getString("country");
+
+                        JSONObject logosJson = newsJson.getJSONObject("urlsToLogos");
+                        UrlLogos logos = new UrlLogos();
+                        logos.small = logosJson.getString("small");
+                        logos.medium = logosJson.getString("medium");
+                        logos.large = logosJson.getString("large");
+                        news1.logos = logos;
+
+                        JSONObject sortJson = newsJson.getJSONObject("sortsBysAvailable");
+                        SortAvailable sort = new SortAvailable();
+                        sort.top = sortJson.getString("top");
+                        news1.available = sort;
+
                     }
                 }
-            return null;
         } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
+            }
+            finally {
+                if (connection != null){
+                    connection.disconnect();
+                }
+            }
+            return  result;
             }
         }
 

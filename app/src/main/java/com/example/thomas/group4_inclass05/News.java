@@ -8,4 +8,6 @@ class News {
     String id, name, description, url, category, language, country;
     UrlLogos logos;
     SortAvailable available;
+
+    public News(){}
 }
