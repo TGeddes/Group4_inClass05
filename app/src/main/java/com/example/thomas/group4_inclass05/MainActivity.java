@@ -4,9 +4,11 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,6 +25,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(isConnected()){
+            Toast.makeText(MainActivity.this, "Connected", Toast.LENGTH_SHORT).show();
+            new GetDataAsync().execute("https://newsapi.org/v1/sources");
+        }
+        else
+            Toast.makeText(MainActivity.this, "Disconnected", Toast.LENGTH_SHORT).show();
+
     }
 
     private boolean isConnected() {
