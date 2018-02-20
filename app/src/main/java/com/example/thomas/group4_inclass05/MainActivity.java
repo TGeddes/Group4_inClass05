@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
@@ -102,6 +103,16 @@ public class MainActivity extends AppCompatActivity {
             }
             return  result;
             }
+
+        @Override
+        protected void onPostExecute(ArrayList<News> result) {
+            if(result.size() > 0){
+                Log.d("demo", result.toString());
+            }
+            else{
+                Log.d("demo", "empty result");
+            }
         }
+    }
 
 }
