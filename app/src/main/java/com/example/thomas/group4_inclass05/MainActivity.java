@@ -1,5 +1,6 @@
 package com.example.thomas.group4_inclass05;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -7,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //ScrollView scrollView = findViewById(R.id.sView);
 
         if(isConnected()){
             Toast.makeText(MainActivity.this, "Connected", Toast.LENGTH_SHORT).show();
@@ -49,6 +53,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class GetDataAsync extends AsyncTask<String, Void, ArrayList<News>> {
+
+        private ProgressDialog dialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            dialog = new ProgressDialog(MainActivity.this);
+            dialog.setMessage("Loading...");
+            dialog.show();
+        }
+
         @Override
         protected ArrayList<News> doInBackground(String... params) {
             HttpURLConnection connection = null;
@@ -87,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
                         sort.top = sortJson.getString("top");
                         news1.available = sort;
 
+                        result.add(news1);
+
                     }
                 }
         } catch (MalformedURLException e) {
@@ -112,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
             else{
                 Log.d("demo", "empty result");
             }
+
+            dialog.dismiss();
         }
     }
 
