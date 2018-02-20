@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     String json = IOUtils.toString(connection.getInputStream(), "UTF8");
 
                     JSONObject root = new JSONObject(json);
-                    JSONArray news = root.getJSONArray("source");
+                    JSONArray news = root.getJSONArray("sources");
 
                     for(int i = 0; i < news.length(); i++){
                         JSONObject newsJson = news.getJSONObject(i);
