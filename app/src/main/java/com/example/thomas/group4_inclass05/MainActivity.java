@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(isConnected()){
             Toast.makeText(MainActivity.this, "Connected", Toast.LENGTH_SHORT).show();
-            new GetDataAsync().execute("https://newsapi.org/v1/sources");
+            new GetDataAsync().execute("https://newsapi.org/v2/sources?apiKey=53d845dc510b4069b2affea39f142fc7");
         }
         else
             Toast.makeText(MainActivity.this, "Disconnected", Toast.LENGTH_SHORT).show();
