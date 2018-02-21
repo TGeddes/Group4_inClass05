@@ -81,28 +81,28 @@ public class MainActivity extends AppCompatActivity {
 
                     for(int i = 0; i < news.length(); i++){
                         JSONObject newsJson = news.getJSONObject(i);
-                        News news1 = new News();
-                        news1.id = newsJson.getString("id");
-                        news1.name = newsJson.getString("name");
-                        news1.description = newsJson.getString("description");
-                        news1.url = newsJson.getString("url");
-                        news1.category = newsJson.getString("category");
-                        news1.language = newsJson.getString("language");
-                        news1.country = newsJson.getString("country");
+                        News newsObj = new News();
+                        newsObj.id = newsJson.getString("id");
+                        newsObj.name = newsJson.getString("name");
+                        newsObj.description = newsJson.getString("description");
+                        newsObj.url = newsJson.getString("url");
+                        newsObj.category = newsJson.getString("category");
+                        newsObj.language = newsJson.getString("language");
+                        newsObj.country = newsJson.getString("country");
 
                         JSONObject logosJson = newsJson.getJSONObject("urlsToLogos");
                         UrlLogos logos = new UrlLogos();
                         logos.small = logosJson.getString("small");
                         logos.medium = logosJson.getString("medium");
                         logos.large = logosJson.getString("large");
-                        news1.logos = logos;
+                        newsObj.logos = logos;
 
                         JSONObject sortJson = newsJson.getJSONObject("sortsBysAvailable");
                         SortAvailable sort = new SortAvailable();
                         sort.top = sortJson.getString("top");
-                        news1.available = sort;
+                        newsObj.available = sort;
 
-                        result.add(news1);
+                        result.add(newsObj);
 
                     }
                 }

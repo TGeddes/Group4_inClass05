@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Group4_inClass05.iml" filepath="$PROJECT_DIR$/Group4_inClass05.iml" />
-      <module fileurl="file://C:\Users\spyke\AndroidStudioProjects\Group4_inClass05\Group4_inClass05.iml" filepath="C:\Users\spyke\AndroidStudioProjects\Group4_inClass05\Group4_inClass05.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\spyke\AndroidStudioProjects\Group4_inClass05\app\app.iml" filepath="C:\Users\spyke\AndroidStudioProjects\Group4_inClass05\app\app.iml" />
     </modules>
   </component>
 </project>
