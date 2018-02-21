@@ -8,6 +8,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
@@ -30,14 +35,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //ScrollView scrollView = findViewById(R.id.sView);
+        LinearLayout parentLayout = findViewById(R.id.layout);
 
-        if(isConnected()){
-            Toast.makeText(MainActivity.this, "Connected", Toast.LENGTH_SHORT).show();
-            new GetDataAsync().execute("https://newsapi.org/v2/sources?apiKey=53d845dc510b4069b2affea39f142fc7");
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View view;
+
+        for (int i = 1; i < 77; i++) {
+            view = layoutInflater.inflate(R.layout.text_layout, parentLayout, false);
+
+            TextView textView = view.findViewById(R.id.text);
+            textView.setText(i);
+
+            parentLayout.addView(textView);
         }
-        else
+
+
+        if (isConnected()) {
+            Toast.makeText(MainActivity.this, "Connected", Toast.LENGTH_SHORT).show();
+            new GetDataAsync().execute("https://newsapi.org/v2/sources?apiKey=be4ba9a87743490180aea363f176570f");
+        } else {
             Toast.makeText(MainActivity.this, "Disconnected", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -56,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
     private class GetDataAsync extends AsyncTask<String, Void, ArrayList<News>> {
 
         private ProgressDialog dialog;
+
 
         @Override
         protected void onPreExecute() {
