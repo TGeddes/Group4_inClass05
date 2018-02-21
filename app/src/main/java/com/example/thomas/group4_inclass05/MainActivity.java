@@ -23,6 +23,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    public int loopSize = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             super.onPreExecute();
 
             dialog = new ProgressDialog(MainActivity.this);
-            dialog.setMessage("Loading...");
+            dialog.setMessage("Loading Sources...");
             dialog.show();
         }
 
@@ -78,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
 
                     JSONObject root = new JSONObject(json);
                     JSONArray news = root.getJSONArray("sources");
+
+                    loopSize = news.length();
 
                     for(int i = 0; i < news.length(); i++){
                         JSONObject newsJson = news.getJSONObject(i);
